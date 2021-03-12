@@ -22,7 +22,7 @@ package base;
 
 import java.util.Scanner;
 
-public class 念整数 {
+public class SpellInteger {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
