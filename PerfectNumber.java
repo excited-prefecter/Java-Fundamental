@@ -24,7 +24,7 @@ package base;
 
 import java.util.Scanner;
 
-public class 完数 {
+public class PerfectNumber {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
