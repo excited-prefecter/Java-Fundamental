@@ -34,7 +34,7 @@ package base;
 
 import java.util.Scanner;
 
-public class 多项式加法 {
+public class AdditionOfPolynomials {
 
 	public static void main(String[] args) {
 			// TODO Auto-generated method stub
