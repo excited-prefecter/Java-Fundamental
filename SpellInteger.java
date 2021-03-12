@@ -22,7 +22,7 @@ package base;
 
 import java.util.Scanner;
 
-public class 念整数 {
+public class SpellInteger {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -62,7 +62,7 @@ public class 念整数 {
 	}
 
 	private static int mN(int m, int n) {
-		// 以整数a为底数,以整数n为指数的幂
+		// 以正整数a为底数,以整数n为指数的幂
 		int a = 1;
 //		double b = 1;
 		if (n >= 0)
@@ -72,17 +72,6 @@ public class 念整数 {
 				a = a*m;
 			}
 		}
-//		因为负指数会计算出浮点数,在此省略
-//		else
-//		{
-//			for(int j=0;j < -n; j++)
-//			{
-//				a = a*m;
-//			}
-//			b = 1/a;
-//			a = (int) b;
-//			return a;
-//		}
 		return a;
 	}
 
