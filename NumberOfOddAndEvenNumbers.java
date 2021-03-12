@@ -19,7 +19,7 @@ package base;
 
 import java.util.Scanner;
 
-public class 奇偶个数 {
+public class NumberOfOddAndEvenNumbers {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
