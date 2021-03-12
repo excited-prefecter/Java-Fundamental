@@ -22,54 +22,48 @@ package base;
 
 import java.util.Scanner;
 
-public class SpellInteger {
+public class 念整数 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner in = new Scanner(System.in);
-		int a = in.nextInt();
+		int num = in.nextInt();
 		in.close();
-		if (a < 0) {
+		if (num < 0) {
 			System.out.print("fu ");
-			a = -a;
+			num = -num;
+			//负数改为正数, 方便下一步操作
 		}
-//		从高位取数,依次念
-		for(int i = 6, j = 0, b = 0; i > 0 ; i--){
-//			如果待取的数小于(i-1)位数,跳过此轮循环,进入下一轮
-			if(a < mN(10,i-1)){
+
+		for(int biggestNumOfDigit = 6, digit = 0; biggestNumOfDigit > 0 ; biggestNumOfDigit--){
+//			如果num小于10的(biggestNumOfDigit-1)次方, 那么num的数位小于此biggestNumOfDigit数位, 跳过此轮
+			if(num < powers(10,biggestNumOfDigit-1)){
 				continue;
-			}
-			b = (int)(((a % mN(10,i)) - (a % mN(10,i-1)))/mN(10,i-1));
-//			如果取得的数是非零数,计数加一
-			if(b != 0){
-				j++;
-			}
-//			取得的数是零,取得非零数总计数为零,即取得的零无效,跳过此轮循环,进入下一轮
-			if(b == 0 && j == 0){
-				continue;
-			}
-			voice(b);
-			if(i <= 6 && i > 1){
-				System.out.print(" ");
+			}else {
+//			从高位取数,每次取一个“digit”, 比如900中的9、0、0
+				digit = (int)(((num % powers(10,biggestNumOfDigit)) - (num % powers(10,biggestNumOfDigit-1)))/powers(10,biggestNumOfDigit-1));
+				voice(digit);
+				if(biggestNumOfDigit > 1){
+					System.out.print(" ");
+				}
 			}
 		}
 	}
 
-	private static int mN(int m, int n) {
-		// 以正整数a为底数,以整数n为指数的幂
-		int a = 1;
-//		double b = 1;
+	private static int powers(int a, int n) {
+		// 以整数a为底数,以整数n为指数的幂
+		int tempNum = 1;
 		if (n >= 0){
 			for(int j=0;j < n; j++){
-				a = a*m;
+				tempNum = tempNum*a;
 			}
 		}
-		return a;
+		return tempNum;
 	}
 
-	private static void voice(int b) {
+	private static void voice(int digit) {
 		// TODO Auto-generated method stub
-		switch (b) {
+		switch (digit) {
 			case 0: {System.out.print("ling"); break;}
 			case 1: {System.out.print("yi"); break;}
 			case 2: {System.out.print("er"); break;}
@@ -81,7 +75,7 @@ public class SpellInteger {
 			case 8: {System.out.print("ba"); break;}
 			case 9: {System.out.print("jiu"); break;}
 		default:
-			throw new IllegalArgumentException("Unexpected value: " + b);
+			throw new IllegalArgumentException("Unexpected value: " + digit);
 		}
 	}
 }
