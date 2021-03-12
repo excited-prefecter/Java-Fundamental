@@ -43,44 +43,34 @@ public class AdditionOfPolynomials {
 		int [][] numbers = new int[arraySize1][arraySize2];
 //		读入二维数组i行j列
 		Scanner in = new Scanner(System.in);
-		for (int i = 0; i < arraySize1; i++) 
-		{
-			for (int j = 0; j < arraySize2; j++) 
-			{
+		for (int i = 0; i < arraySize1; i++) {
+			for (int j = 0; j < arraySize2; j++) {
 				numbers[i][j] = in.nextInt();
 			}
 		}
 		in.close();
-		for (int i = 0; i < arraySize1; i++) 
-		{
+		for (int i = 0; i < arraySize1; i++){
 //			系数的符号,系数大于零时,第二个开始输出,倒数第二个为最后的输出,输出“+”
-			if(i > 0 && i < arraySize1) 
-			{
+			if(i > 0 && i < arraySize1) {
 //				二维数组,为了明了,直接限定列区域[1]或者[0]
-				if(numbers[i][1] > 0)
-				{
+				if(numbers[i][1] > 0){
 					System.out.print("+");
 				}
 			}
 //			系数为零,跳过项
-			if(numbers[i][1] != 0) 
-			{
+			if(numbers[i][1] != 0) {
 //				指数为零,不输出“x”
-				if(numbers[i][0] == 0)
-				{
+				if(numbers[i][0] == 0){
 					System.out.print(numbers[i][1]);
 				}
-				else
-				{
+				else{
 //					指数为1,只输出“x”
-					if(numbers[i][0] == 1)
-					{
+					if(numbers[i][0] == 1){
 						System.out.print(numbers[i][1]+"x");
 					}
 //					指数不为0,也不为1,完整输出
 //					指数为负数的情况,题目未提及,按此处理
-					else 
-					{
+					else {
 						System.out.print(numbers[i][1]+"x"+numbers[i][0]);
 					}
 				}
