@@ -18,6 +18,12 @@
 //输出样例：
 //fu san ling
 //时间限制：500ms内存限制：32000kb
+
+
+/*
+解题思路:
+先判断数的大小, 然后从左往右, 依次取一位数, 输出对应的文字
+*/
 package base;
 
 import java.util.Scanner;
