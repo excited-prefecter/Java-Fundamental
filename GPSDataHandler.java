@@ -58,7 +58,7 @@ package base;
 
 import java.util.Scanner;
 
-public class GPSdataHandler {
+public class GPSDataHandler {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
