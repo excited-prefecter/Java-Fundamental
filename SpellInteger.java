@@ -29,33 +29,27 @@ public class SpellInteger {
 		Scanner in = new Scanner(System.in);
 		int a = in.nextInt();
 		in.close();
-		if (a < 0) 
-		{
+		if (a < 0) {
 			System.out.print("fu ");
 			a = -a;
 		}
 //		从高位取数,依次念
-		for(int i = 6, j = 0, b = 0; i > 0 ; i--)
-		{
+		for(int i = 6, j = 0, b = 0; i > 0 ; i--){
 //			如果待取的数小于(i-1)位数,跳过此轮循环,进入下一轮
-			if(a < mN(10,i-1))
-			{
+			if(a < mN(10,i-1)){
 				continue;
 			}
 			b = (int)(((a % mN(10,i)) - (a % mN(10,i-1)))/mN(10,i-1));
 //			如果取得的数是非零数,计数加一
-			if(b != 0)
-			{
+			if(b != 0){
 				j++;
 			}
 //			取得的数是零,取得非零数总计数为零,即取得的零无效,跳过此轮循环,进入下一轮
-			if(b == 0 && j == 0)
-			{
+			if(b == 0 && j == 0){
 				continue;
 			}
 			voice(b);
-			if(i <= 6 && i > 1)
-			{
+			if(i <= 6 && i > 1){
 				System.out.print(" ");
 			}
 		}
@@ -65,10 +59,8 @@ public class SpellInteger {
 		// 以正整数a为底数,以整数n为指数的幂
 		int a = 1;
 //		double b = 1;
-		if (n >= 0)
-		{
-			for(int j=0;j < n; j++)
-			{
+		if (n >= 0){
+			for(int j=0;j < n; j++){
 				a = a*m;
 			}
 		}
@@ -77,8 +69,7 @@ public class SpellInteger {
 
 	private static void voice(int b) {
 		// TODO Auto-generated method stub
-		switch (b) 
-		{
+		switch (b) {
 			case 0: {System.out.print("ling"); break;}
 			case 1: {System.out.print("yi"); break;}
 			case 2: {System.out.print("er"); break;}
