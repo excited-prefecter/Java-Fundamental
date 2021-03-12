@@ -18,7 +18,7 @@ package base;
 
 import java.util.Scanner;
 
-public class 单词长度 {
+public class LengthOfWords {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
