@@ -29,31 +29,26 @@ public class LengthOfWords {
 
 //		定位空格,循环打印.
 		int blankLoc = s.indexOf(" ");
-		if(blankLoc != -1)
-		{
+		if(blankLoc != -1){
 			String s2 = s.substring(0,blankLoc);
 			System.out.print(s2.length() + " ");
 		}
-		while(blankLoc != -1) 
-		{
+		while(blankLoc != -1) {
 			int blankLoc2 = s.indexOf(" ", blankLoc + 1);
-			if(blankLoc2 != -1 )
-			{
+			if(blankLoc2 != -1 ){
 				String s3 = s.substring(blankLoc + 1, blankLoc2);
 				System.out.print(s3.length() + " ");
 //				新起点
 				blankLoc = blankLoc2;
 			}
-			else
-			{
+			else{
 //				找不到下一个空格,循环终止.
 				break;
 			}
 		}
 //		定位“.”的位置,打印最后一组字符串的长度
 		int dotLoc = s.indexOf(".");
-		if(dotLoc != -1 )
-		{
+		if(dotLoc != -1 ){
 			String s4 = s.substring(blankLoc + 1, dotLoc);
 			System.out.print(s4.length());
 		}
