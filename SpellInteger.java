@@ -31,16 +31,16 @@ public class SpellInteger {
 		in.close();
 		if (num < 0) {
 			System.out.print("fu ");
-			num = -num;
 			//负数改为正数, 方便下一步操作
+			num = -num;
 		}
 
 		for(int biggestNumOfDigit = 6, digit = 0; biggestNumOfDigit > 0 ; biggestNumOfDigit--){
-//			如果num小于10的(biggestNumOfDigit-1)次方, 那么num的数位小于此biggestNumOfDigit数位, 跳过此轮
+			//如果num小于10的(biggestNumOfDigit-1)次方, 那么num的数位小于此biggestNumOfDigit数位, 跳过此轮
 			if(num < powers(10,biggestNumOfDigit-1)){
 				continue;
 			}else {
-//			从高位取数,每次取一个“digit”, 比如900中的9、0、0
+				//从高位取数,每次取一个“digit”, 比如900中的9、0、0
 				digit = (int)(((num % powers(10,biggestNumOfDigit)) - (num % powers(10,biggestNumOfDigit-1)))/powers(10,biggestNumOfDigit-1));
 				voice(digit);
 				if(biggestNumOfDigit > 1){
@@ -49,9 +49,10 @@ public class SpellInteger {
 			}
 		}
 	}
-
+	
+	// 以整数a为底数,以整数n为指数的幂
 	private static int powers(int a, int n) {
-		// 以整数a为底数,以整数n为指数的幂
+		
 		int tempNum = 1;
 		if (n >= 0){
 			for(int j=0;j < n; j++){
@@ -61,6 +62,7 @@ public class SpellInteger {
 		return tempNum;
 	}
 
+	//输出对应的文字
 	private static void voice(int digit) {
 		// TODO Auto-generated method stub
 		switch (digit) {
