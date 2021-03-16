@@ -30,6 +30,7 @@
 //输出样例：
 //4x6+6x5+12x3+12x2+12x+40
 //时间限制：500ms内存限制：32000kb
+
 package base;
 
 import java.util.Scanner;
@@ -38,45 +39,67 @@ public class AdditionOfPolynomials {
 
 	public static void main(String[] args) {
 			// TODO Auto-generated method stub
-		final int arraySize1 = 10;
-		final int arraySize2 = 2;
-		int [][] numbers = new int[arraySize1][arraySize2];
-//		读入二维数组i行j列
 		Scanner in = new Scanner(System.in);
-		for (int i = 0; i < arraySize1; i++) {
-			for (int j = 0; j < arraySize2; j++) {
-				numbers[i][j] = in.nextInt();
-			}
-		}
-		in.close();
-		for (int i = 0; i < arraySize1; i++){
-//			系数的符号,系数大于零时,第二个开始输出,倒数第二个为最后的输出,输出“+”
-			if(i > 0 && i < arraySize1) {
-//				二维数组,为了明了,直接限定列区域[1]或者[0]
-				if(numbers[i][1] > 0){
-					System.out.print("+");
-				}
-			}
-//			系数为零,跳过项
-			if(numbers[i][1] != 0) {
-//				指数为零,不输出“x”
-				if(numbers[i][0] == 0){
-					System.out.print(numbers[i][1]);
-				}
-				else{
-//					指数为1,只输出“x”
-					if(numbers[i][0] == 1){
-						System.out.print(numbers[i][1]+"x");
-					}
-//					指数不为0,也不为1,完整输出
-//					指数为负数的情况,题目未提及,按此处理
-					else {
-						System.out.print(numbers[i][1]+"x"+numbers[i][0]);
-					}
-				}
-			}
+		int numberOfPolynomials = 2;
+		int isFirstOne = 1;
+		do {
+			//(系数)X^(指数)
+			//(coefficient)X^(degree)
+			int degree = in.nextInt();
+			int coefficient = in.nextInt();
 
-		}
+			//不是首个项时, 输出正号, 负号由函数simpleCoefficient负责
+			if(coefficient > 0 && isFirstOne == 0 ){
+				System.out.print("+");
+			}
+			if (isFirstOne == 1) {
+				isFirstOne = 0;
+			}
+			
+			simpleCoefficient(coefficient, degree);
+			simpleDegree(degree);
+			
+			//指数为零, 一个多项式输入结束
+			if(degree == 0){
+				System.out.print("\n");
+				numberOfPolynomials -= 1;
+				isFirstOne = 1;
+			}
+		}while(numberOfPolynomials > 0);
+		in.close();
 	}
 
+	//先从指数部分着手, 简化, 再跟系数部分整合, 从右往左
+	private static void simpleCoefficient(int coefficient, int degree) {
+		if(coefficient != 0){
+			if(coefficient == 1){
+				System.out.print("1");
+			}else if(coefficient == -1){
+				if(degree != 0) {
+					System.out.print("-");
+				}else {
+					System.out.print("-1");
+				}
+			}else{
+				System.out.print(coefficient);
+			}
+		}
+	}
+	
+	private static void simpleDegree(int degree) {
+	if(degree == 0){
+//		先从指数部分着手, 简化, 再跟系数部分整合,当指数为0时,只需要打印系数部分
+//		System.out.print("1");
+	}else {
+		if(degree == 1){
+			System.out.print("x");
+		}
+		else if(degree > 0){
+			System.out.print("x"+degree);
+		}else if(degree < 0){
+			System.out.print("x"+"("+degree+")");
+		}
+	}
+}
+	
 }
