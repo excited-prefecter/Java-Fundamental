@@ -54,67 +54,65 @@
 //10:48:13
 //时间限制：500ms内存限制：32000kb
 
+
 package base;
 
 import java.util.Scanner;
 
-public class GPSDataHandler {
+public class GPSdataHandler {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		StringBuffer s = new StringBuffer();
+		StringBuffer receivedString = new StringBuffer();
 		Scanner in = new Scanner(System.in);
 		do {
-			s.replace(0, 65, in.nextLine());
-			if(s.charAt(0)== 'E' && s.charAt(1)== 'N' && s.charAt(2)== 'D'){
+			receivedString.replace(0, 65, in.nextLine());
+			if(receivedString.charAt(0)== 'E' && receivedString.charAt(1)== 'N' && receivedString.charAt(2)== 'D'){
 				break;
 			}
-			handler(s);
+			handler(receivedString);
 		}while(true);
 		in.close();
 	}
 
-private static void handler(StringBuffer s) {
+private static void handler(StringBuffer receivedString) {
 //		找出$GPRMC语句的位置
 	String begin = "$GPRMC,";
-	int beginLocation = s.indexOf(begin);
+	int beginLocation = receivedString.indexOf(begin);
 //		定位“*”的位置
-	int endLocation = s.indexOf("*");
+	int endLocation = receivedString.indexOf("*");
 	
-//		异或值校验
+//		异或值计算
 	int XORvalue = 0;
-	char c1 = s.charAt(beginLocation + 1);
-	char c2 = s.charAt(beginLocation + 2);
-	XORvalue = c1^c2;
-	for (int i = beginLocation + 3; i < endLocation; i++) 
-	{
-		char c3 = s.charAt(i);
-		XORvalue = XORvalue^c3;
+	char char1 = receivedString.charAt(beginLocation + 1);
+	char char2 = receivedString.charAt(beginLocation + 2);
+	XORvalue = char1^char2;
+	for (int i = beginLocation + 3; i < endLocation; i++) {
+		char char3 = receivedString.charAt(i);
+		XORvalue = XORvalue^char3;
 	}
-	int inputXORvalue = Integer.parseInt(s.substring(endLocation+1, endLocation + 3), 16)%65536;
-		
+//		接收的异或校验值
+	int receivedXORvalue = Integer.parseInt(receivedString.substring(endLocation+1, endLocation + 3), 16)%65536;
+	
 //		已定位校验值获取
-	int firstCOMMAlocation = s.indexOf(",");
-	int secondCOMMAlocatio = s.indexOf(",",firstCOMMAlocation+1);
-	char locTrue = s.charAt(secondCOMMAlocatio + 1);
+	int firstCommalocation = receivedString.indexOf(",");
+	int secondCommaLocation = receivedString.indexOf(",",firstCommalocation+1);
+	char isLocated = receivedString.charAt(secondCommaLocation + 1);
 
 //		所有校验成功后,转换时间格式并输出
-	if(XORvalue == inputXORvalue && locTrue == 'A'){
-		Integer utc = Integer.parseInt(s.substring(beginLocation+ begin.length(), beginLocation+ begin.length() + 6));
+	if(XORvalue == receivedXORvalue && isLocated == 'A'){
+		Integer utc = Integer.parseInt(receivedString.substring(beginLocation+ begin.length(), beginLocation+ begin.length() + 6));
 		Integer bjt = 0;
-		if (utc >= 0 && utc <= 155959)
-		{
+		if (utc >= 0 && utc <= 155959){
 			bjt = utc + 80000;
 			System.out.println(bjt.toString().substring(0, 2)+":"+bjt.toString().substring(2, 4)+":"+bjt.toString().substring(4, 6));
 		}
-		else if (utc >= 160000 && utc <= 235959)
-		{
+		else if (utc >= 160000 && utc <= 235959){
 			bjt = utc + 80000 - 240000;
 			System.out.println(bjt.toString().substring(0, 2)+":"+bjt.toString().substring(2, 4)+":"+bjt.toString().substring(4, 6));
 		}
 	}
-	else
-	{
+	else{
 		System.out.println("输入错误!");
 	}
 }
